@@ -68,16 +68,6 @@ def update_pending_scores(scores, val)
 end
 
 scores = []
-frames.each.with_index do | frame, ind|
-  is_last = ind == (frames.length - 1) ? true : false   
-  frame.each do |roll|
-    score_obj = initialize_obj(is_last)
-    prev_value = scores.length == 0 ? 0 : scores.last[:current_value] 
-    score_obj = evaluate_roll(roll, score_obj, prev_value)  
-    current_value = score_obj[:current_value]      
-    update_pending_scores(scores, current_value)
-    scores << score_obj  
-  end
-end
+
 p scores.each{|s| p s}
 p scores.inject(0){|acc, el| acc + el[:total] unless el[:pending1] || el[:pending2]}
